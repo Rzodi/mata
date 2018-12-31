@@ -87,11 +87,11 @@ function AddENBs(quantity){
 		'<div class="row mx-md-5">'+	
 				'<div class="col-md-6">'+
 					'<label class="col-md-12">Położenie X ('+i+' eNodeB)</label>'+
-					'<input class="form-control" name="enb['+i+'].x" type="number" min="0" value="1">'+
+					'<input class="form-control" name="enbs['+i+'].x" type="number" min="0" value="1">'+
 				'</div>'+
 				'<div class="col-md-6">'+
 					'<label class="col-md-12">Położenie Y ('+i+' eNodeB)</label>'+
-					'<input class="form-control" name="enb['+i+'].y" type="number" min="0" value="1">'+
+					'<input class="form-control" name="enbs['+i+'].y" type="number" min="0" value="1">'+
 				'</div>'+					
 		'</div>'	
 		);
