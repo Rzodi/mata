@@ -6,6 +6,7 @@
 #include <cgicc/Cgicc.h>
 #include <cgicc/HTTPHTMLHeader.h>
 #include <cgicc/HTMLClasses.h>
+#include "solver.h"
 
 using namespace std;
 using namespace cgicc;
@@ -167,7 +168,8 @@ int main( int argc, char ** argv, char ** envp )
 
         //zbiórka danych z wowałania optymalizatora do jakiejś klasy
         //result następnie ten obiekt zostaje przekazany do funkcji sendJson
-
+	//output.create_gmpl_with_data(Alpha, Beta, Gamma, Min_demand, Max_demand, Omega);
+	//output=output.solve_problem();
         sendJson(model);    
     }
     catch( exception & e )

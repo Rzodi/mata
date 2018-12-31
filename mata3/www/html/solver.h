@@ -8,8 +8,10 @@
 #include <fstream>
 #include <vector>
 #include <regex>
+#include <chrono>
 
 using namespace std;
+using namespace std::chrono;
 
 class solver {
 public:
@@ -18,12 +20,13 @@ public:
 	float optimal_solution;
 	bool is_problem_feasible;
 	bool unexpected_error;
+	float time_in_microseconds;
 	solver();
 	virtual ~solver();
 	static string exec(const char* cmd);
 	static void create_gmpl_with_data(vector<vector<float>> Alpha, float Beta,
 			vector<vector<float>> Gamma, vector<float> Min_demand,
-			vector<float> Max_demand);
+			vector<float> Max_demand, int Omega);
 	solver solve_problem();
 };
 

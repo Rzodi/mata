@@ -28,7 +28,7 @@ string solver::exec(const char* cmd) {
 }
 void solver::create_gmpl_with_data(vector<vector<float>> Alpha, float Beta,
 		vector<vector<float>> Gamma, vector<float> Min_demand,
-		vector<float> Max_demand) {
+		vector<float> Max_demand, int Omega) {
 
 	ifstream source("model_template.mod", ios::binary);
 	ofstream dest("model_tmp.mod", ios::binary);
@@ -43,6 +43,7 @@ void solver::create_gmpl_with_data(vector<vector<float>> Alpha, float Beta,
 	dest << "param U_count := " << Alpha.size() << ";" << endl;
 	dest << "param ENB_count := " << Alpha[0].size() << ";" << endl;
 	dest << "param wifi_count := " << Gamma[0].size() << ";" << endl;
+	dest << "param Omega := " << Omega << ";" << endl;
 	dest << endl << "param : Alpha :=" << endl;
 
 	for (int i = 0; i < Alpha.size(); i++) {
@@ -95,9 +96,16 @@ solver solver::solve_problem() {
 	vector<float> tmp_vector_lte;
 	vector<float> tmp_vector_wifi;
 	const char* cmd;
+	high_resolution_clock::time_point t1;
+	high_resolution_clock::time_point t2;
+
 	cmd = "cbc model_tmp.mod% -solve -solu output.txt";
 	output.unexpected_error = true;
+	t1 = high_resolution_clock::now();
 	solver::exec(cmd);
+	t2 = high_resolution_clock::now();
+	auto duration = duration_cast<microseconds>( t2 - t1 ).count();
+	output.time_in_microseconds = (float) duration;
 	if (cbc_file.is_open()) {
 		getline(cbc_file, line);
 		if (line.find("Infeasible") < 10000) {
