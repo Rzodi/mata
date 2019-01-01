@@ -166,6 +166,8 @@ int main( int argc, char ** argv, char ** envp )
         FormModel model = ReciveData();
 		user_alpha_gamma user_alpha_gamma;
 		userVector = user_alpha_gamma.user_position_demands(model.UserCounter, model.MaxDemand, model.MaxDemand, model.SizeX, model.SizeY);
+		alphaVector = user_alpha_gamma.f_alpha(model.UserCounter, model.enbCounter, model.AddREnbPosition(X), model.AddREnbPosition(Y), my_vector[0], my_vector[1], model.EnbRange, 26);
+		gammaVector = user_alpha_gamma.f_gamma(model.UserCounter, model.routerCounter, model.AddRouterPosition(X), model.AddRouterPosition(Y), my_vector[0], my_vector[1], model.RouterRange, 1);
         //tutaj należy dodać wywołanie randomizowania użytkowników, obliczanie współczynników, tworzenie i odpalanie modelu
 
         //zbiórka danych z wowałania optymalizatora do jakiejś klasy
