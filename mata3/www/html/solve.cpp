@@ -7,6 +7,7 @@
 #include <cgicc/HTTPHTMLHeader.h>
 #include <cgicc/HTMLClasses.h>
 #include "solver.h"
+#include "user_alpha_gamma.h"
 
 using namespace std;
 using namespace cgicc;
@@ -163,7 +164,8 @@ int main( int argc, char ** argv, char ** envp )
     {
         //odebranie danych z formularza
         FormModel model = ReciveData();
-
+		user_alpha_gamma user_alpha_gamma;
+		userVector = user_alpha_gamma.user_position_demands(model.UserCounter, model.MaxDemand, model.MaxDemand, model.SizeX, model.SizeY);
         //tutaj należy dodać wywołanie randomizowania użytkowników, obliczanie współczynników, tworzenie i odpalanie modelu
 
         //zbiórka danych z wowałania optymalizatora do jakiejś klasy
