@@ -50,13 +50,6 @@ FormModel ReciveData()
     return model;
 }
 
-inline const char * const BoolToString(bool b)
-{
-  return b ? "true" : "false";
-}
-
-
-
 //vector<vector<float>> userVector, solver outputFromModel - jako dodatkowy argument oraz
 void sendJson(FormModel model, vector<vector<float>> userVector, solver outputFromModel){
 
@@ -113,7 +106,7 @@ void sendJson(FormModel model, vector<vector<float>> userVector, solver outputFr
         float lteThroughput = 0;
         float wifiThroughput = 0;
  
-        for(int i = 0; i < userVector.size(); i++){
+        for(int i = 0; i < userVector[0].size(); i++){
             for(int z = 0; z < outputFromModel.LTE_throughput_per_user.size(); z++ ){
                 if(outputFromModel.LTE_throughput_per_user[z][1] == i + 1){
                     lteThroughput = outputFromModel.LTE_throughput_per_user[z][2];
@@ -126,8 +119,8 @@ void sendJson(FormModel model, vector<vector<float>> userVector, solver outputFr
                     break;
                 }
             }
-            cout << "{\"x\": " + to_string(userVector[i][0]) + ", \"y\": " + to_string(userVector[i][1]) + ", \"min_demand\" : " + to_string(userVector[i][2]) + ", \"max_demand\" : " + to_string(userVector[i][3]) + ", \"wifi\" : "+to_string(wifiThroughput) +", \"lte\" : "+to_string(lteThroughput) +"}";
-            if(i != userVector.size() -1){
+            cout << "{\"x\": " + to_string(userVector[0][i]) + ", \"y\": " + to_string(userVector[1][i]) + ", \"min_demand\" : " + to_string(userVector[2][i]) + ", \"max_demand\" : " + to_string(userVector[3][i]) + ", \"wifi\" : "+to_string(wifiThroughput) +", \"lte\" : "+to_string(lteThroughput) +"}";
+            if(i != userVector[0].size() -1){
                 cout << ",";
             }
         }
