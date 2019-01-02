@@ -14,11 +14,20 @@ vector<vector<float>> user_alpha_gamma::user_position_demands(int users, float m
 	float mediumDemand = (maxDemand + minDemand)/2;
 	vector<vector<float>> my_vector(4, vector<float> (users));
 
+	float rand_FloatRange(float a, float b)
+	{
+		return ((b - a) * ((float)rand() / RAND_MAX)) + a;
+	}
+
 	for (int i = 0; i < users; i++) {
-		float randThroughputMin = minDemand + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX) / (maxDemand - minDemand));
+		float randThroughputMin = rand_FloatRange(minDemand, mediumDemand);
+		float randThroughputMax = rand_FloatRange(mediumDemand, maxDemand);
+		float x = rand_FloatRange(0, x_grid);
+		float y = rand_FloatRange(0, y_grid);
+		/*float randThroughputMin = minDemand + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX) / (maxDemand - minDemand));
 		float randThroughputMax = maxDemand + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX) / (maxDemand - mediumDemand));
 		float x = static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / x_grid));
-		float y = static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / y_grid));
+		float y = static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / y_grid));*/
 
 		my_vector[0][i] = x;
 		my_vector[1][i] = y;
