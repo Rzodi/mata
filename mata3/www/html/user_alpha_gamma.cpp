@@ -9,10 +9,10 @@ user_alpha_gamma::~user_alpha_gamma() {
 	// TODO Auto-generated destructor stub
 }
 
-vector<vector<float>> user_position_demands(int users, float minDemand, float maxDemand, float x_grid, float y_grid)
+vector<vector<float>> user_alpha_gamma::user_position_demands(int users, float minDemand, float maxDemand, float x_grid, float y_grid)
 {
 	float mediumDemand = (maxDemand + minDemand)/2;
-	vector< vector<float>> my_vector;
+	vector<vector<float>> my_vector;
 	for (int i = 0; i < users; i++) {
 		float randThroughputMin = minDemand + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX) / (maxDemand - minDemand));
 		float randThroughputMax = maxDemand + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX) / (maxDemand - mediumDemand));
@@ -26,7 +26,7 @@ vector<vector<float>> user_position_demands(int users, float minDemand, float ma
 	return my_vector;
 }
 
-vector<vector<float>> f_alpha(int U_count, int ENB_count, vector<float> x_enb, vector<float> y_enb, vector<float> x, vector<float> y, float R, float worst_alpha) // definicja funkcji dwuwymiarowej na vector'ze
+vector<vector<float>> user_alpha_gamma::f_alpha(int U_count, int ENB_count, vector<Position> enb_positions, vector<float> x, vector<float> y, float R, float worst_alpha) // definicja funkcji dwuwymiarowej na vectorze
 {
 	float best_alpha = 0.001; // najlepsza alpha, uzywana do wyznaczenia rownania funkcji liniowej - patrz komentarz po main()
 	//int worst_alpha = 25; // najgorsza alpha, uzywana do wyznaczenia rownania funkcji liniowej - patrz komentarz po main()
@@ -38,14 +38,14 @@ vector<vector<float>> f_alpha(int U_count, int ENB_count, vector<float> x_enb, v
 	{
 		for (int e = 0; e < ENB_count; e++) // czytaj powyzszy komentarz
 		{
-			dist_enb[u][e] = sqrt(pow(x_enb[e] - x[u], 2) + pow(y_enb[e] - y[u], 2)); // liczenie odleglosci usera od ENB w ukladzie kartezjanskim
+			dist_enb[u][e] = sqrt(pow(enb_positions[e].X - x[u], 2) + pow(enb_positions[e].Y - y[u], 2)); // liczenie odleglosci usera od ENB w ukladzie kartezjanskim
 			alpha[u][e] = (((worst_alpha - best_alpha) / R) * dist_enb[u][e]) + best_alpha; // liczenie alpha'y z funkcji liniowej w zaleznosci od odleglosci od ENB
 		}
 	}
 	return alpha;
 }
 
-vector<vector<float>> f_gamma(int U_count, int wifi_count, vector<float> x_wifi, vector<float> y_wifi, vector<float> x, vector<float> y, float r, float worst_gamma) // definicja funkcji dwuwymiarowej na vector'ze
+vector<vector<float>> user_alpha_gamma::f_gamma(int U_count, int wifi_count, vector<Position> router_positions, vector<float> x, vector<float> y, float r, float worst_gamma) // definicja funkcji dwuwymiarowej na vector'ze
 {
 	float best_gamma = 0.001; // najlepsza gamma, uzywana do wyznaczenia rownania funkcji liniowej - patrz komentarz po main()
 	//int worst_gamma = 1; // najgorsza gamma, uzywana do wyznaczenia rownania funkcji liniowej - patrz komentarz po main()
@@ -57,7 +57,7 @@ vector<vector<float>> f_gamma(int U_count, int wifi_count, vector<float> x_wifi,
 	{
 		for (int w = 0; w < wifi_count; w++) // czytaj powyzszy komentarz
 		{
-			dist_wifi[u][w] = sqrt(pow(x_wifi[w] - x[u], 2) + pow(y_wifi[w] - y[u], 2)); // liczenie odleglosci usera od routera WIFI w ukladzie kartezjanskim
+			dist_wifi[u][w] = sqrt(pow(router_positions[w].X - x[u], 2) + pow(router_positions[w].Y - y[u], 2)); // liczenie odleglosci usera od routera WIFI w ukladzie kartezjanskim
 			gamma[u][w] = (((worst_gamma - best_gamma) / r) * dist_wifi[u][w]) + best_gamma; // liczenie gamma'y z funkcji liniowej w zaleznosci od odleglosci od routera wifi
 		}
 	}

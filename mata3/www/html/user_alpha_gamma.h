@@ -15,20 +15,20 @@ public:
 	float y_position;
 	float min_throughput;
 	float max_throughput;
-	vector< vector<float>> dist_enb; // definiujemy wektor
-	vector< vector<float>> alpha; // definiujemy wektor 2 wymiarowy
-	vector< vector<float>> dist_wifi; // definiujemy wektor
-	vector< vector<float>> gamma; // definiujemy wektor 2 wymiarowy
-	static vector<vector<float>> user_position_demands(int users, float minDemand, float maxDemand, float x_grid, float y_grid);
+	vector<vector<float>> dist_enb; // definiujemy wektor
+	vector<vector<float>> alpha; // definiujemy wektor 2 wymiarowy
+	vector<vector<float>> dist_wifi; // definiujemy wektor
+	vector<vector<float>> gamma; // definiujemy wektor 2 wymiarowy
+	vector<vector<float>> user_position_demands(int users, float minDemand, float maxDemand, float x_grid, float y_grid);
+	vector<vector<float>> f_alpha(int U_count, int ENB_count, vector<Position> enb_positions, vector<float> x, vector<float> y, float R, float worst_alpha);
+	vector<vector<float>> f_gamma(int U_count, int wifi_count, vector<Position> router_positions, vector<float> x, vector<float> y, float r, float worst_gamma); 
 
-private:
-	int id;
 
 	user_alpha_gamma();
 	~user_alpha_gamma();
-	static vector<vector<float>> f_alpha(int U_count, int ENB_count, vector<float> x_enb, vector<float> y_enb, vector<float> x, vector<float> y, float R);
-	static vector<vector<float>> f_gamma(int U_count, int wifi_count, vector<float> x_wifi, vector<float> y_wifi, vector<float> x, vector<float> y, float r);
+private:
+	int id;
 
-	
+
 };
 
