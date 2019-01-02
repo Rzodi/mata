@@ -142,7 +142,7 @@ int main( int argc, char ** argv, char ** envp )
 
         //tutaj należy dodać wywołanie randomizowania użytkowników, obliczanie współczynników, tworzenie i odpalanie modelu
         user_alpha_gamma calculator;
-        vector<vector<float>> userVector = calculator.user_position_demands(model.UserCounter, model.MinDemand, model.MaxDemand, model.SizeX, model.SizeY);
+        vector<vector<float>> userVector = calculator.user_position_demands(model.UserCounter, model.MinDemand, model.MaxDemand, model.SizeX, model.SizeY, model.GetEnbPositions(), model.GetRouterPositions());
         vector<vector<float>> alphaVector = calculator.f_alpha(model.UserCounter, model.GetEnbPositions().size(), model.GetEnbPositions(), userVector[0], userVector[1], model.EnbRange, model.Alpha, model.Beta, model.Omega);
         vector<vector<float>> gammaVector = calculator.f_gamma(model.UserCounter, model.GetRouterPositions().size(), model.GetRouterPositions(), userVector[0], userVector[1], model.RouterRange, model.Gamma);
             

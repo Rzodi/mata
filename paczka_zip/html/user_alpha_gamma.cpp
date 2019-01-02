@@ -1,5 +1,6 @@
 #include "user_alpha_gamma.h"
 
+
 user_alpha_gamma::user_alpha_gamma() {
 	// TODO Auto-generated constructor stub
 
@@ -9,7 +10,7 @@ user_alpha_gamma::~user_alpha_gamma() {
 	// TODO Auto-generated destructor stub
 }
 
-vector<vector<float>> user_alpha_gamma::user_position_demands(int users, float minDemand, float maxDemand, float x_grid, float y_grid)
+vector<vector<float>> user_alpha_gamma::user_position_demands(int users, float minDemand, float maxDemand, float x_grid, float y_grid, vector<Position> enb_positions, vector<Position> router_positions)
 {
 	float mediumDemand = (maxDemand + minDemand)/2;
 	vector<vector<float>> my_vector(4, vector<float> (users));
@@ -18,6 +19,10 @@ vector<vector<float>> user_alpha_gamma::user_position_demands(int users, float m
 	{
 		return ((b - a) * ((float)rand() / RAND_MAX)) + a;
 	}
+	
+	AB.reserve(A.size() + B.size()); // preallocate memory
+	AB.insert(AB.end(), A.begin(), A.end());
+	AB.insert(AB.end(), B.begin(), B.end());
 
 	for (int i = 0; i < users; i++) {
 		float randThroughputMin = rand_FloatRange(minDemand, mediumDemand);
