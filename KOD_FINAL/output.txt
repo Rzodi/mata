@@ -1,0 +1,5 @@
+Optimal - objective value -1.00000000
+      0 X[1,1]                    0                       0
+      1 Y[1,1]                    1                       0
+      2 Z[1,1]                    0                  -1e+20
+      3 Z_wifi[1,1]               1                      -0

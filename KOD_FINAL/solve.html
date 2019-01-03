@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Optymalizator - problem</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="vendor/simple-line-icons/css/simple-line-icons.css">
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/new-age.min.css" rel="stylesheet">
+	<link href="css/custom.css" rel="stylesheet">
+
+  </head>
+
+  <body id="page-top">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+      <div class="container">
+        <a class="navbar-brand js-scroll-trigger" href="index.html#page-top">Optymalizator</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          Menu
+          <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="index.html#download">Opis</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="index.html#features">Zalety</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#">Znajdź rozwiązanie</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <header class="mastsolve">
+		<div class="container h-100">
+			<div class="row">
+			  <div class="col-md-12 my-auto">
+				<div class="header-content mx-auto">
+				  <h1 class="mb-5">Wprowadź parametry:</h1>
+				</div>
+			  </div>         
+			</div>
+			<div class="col-md-12">
+				<form method="POST" class="col-md-12 form-group" id="solve-form">
+					<div class="row">	
+						<h3 class="text-center col-md-12 pt-md-4">Rozmiar siatki:</h3>
+					</div>
+					<div class="row">		
+						<div class="col-md-6">
+							<label class="col-md-12">Szerokość [m]</label>
+							<input class="form-control" name="size_x" autocomplete="off" type="number" min="1" value="100">
+						</div>	
+						<div class="col-md-6">
+							<label class="col-md-12">Wysokość [m]</label>
+							<input class="form-control" name="size_y" autocomplete="off" type="number" min="1" value="100">
+						</div>									
+					</div>
+					<div class="row">	
+						<h3 class="text-center col-md-12 pt-md-4">Stacje bazowe:</h3>
+					</div>
+					<div class="row">		
+						<div class="col-md-6">
+							<label class="col-md-12">Ilość stacji bazowych</label>
+							<input class="form-control" name="enb_counter" autocomplete="off" id="enbCounter" type="number" min="0" max="30" value="1">
+						</div>
+						<div class="col-md-6">
+							<label class="col-md-12">Promień zasięgu</label>
+							<input class="form-control" name="enb_range" autocomplete="off" id="enbRange" type="number" min="0" value="1">
+						</div>
+					</div>
+					<div id="enbs">	
+						<div class="row mx-md-5">	
+							<div class="col-md-6">
+								<label class="col-md-12">Położenie X (0 eNodeB)</label>
+								<input class="form-control" name="enbs[0].x" autocomplete="off" type="number" min="0" value="1">
+							</div>	
+							<div class="col-md-6">
+								<label class="col-md-12">Położenie Y (0 eNodeB)</label>
+								<input class="form-control" name="enbs[0].y" autocomplete="off" type="number" min="0" value="1">
+							</div>					
+						</div>						
+					</div>
+
+					<div class="row">	
+						<h3 class="text-center col-md-12 pt-md-4">Routery WiFi:</h3>
+					</div>
+					<div class="row">		
+						<div class="col-md-6">
+							<label class="col-md-12">Ilość routerów WiFi</label>
+							<input class="form-control" name="router_counter" autocomplete="off" id="routerCounter" type="number" min="0" max="30" value="1">
+						</div>
+						<div class="col-md-6">
+							<label class="col-md-12">Promień zasięgu</label>
+							<input class="form-control" name="router_range" autocomplete="off" id="routerRange" type="number" min="0" value="1">
+						</div>
+					</div>
+					<div id="routers">	
+						<div class="row mx-md-5">	
+							<div class="col-md-6">
+								<label class="col-md-12">Położenie X (0 router)</label>
+								<input class="form-control" name="routers[0].x" autocomplete="off" type="number" min="0" value="1">
+							</div>	
+							<div class="col-md-6">
+								<label class="col-md-12">Położenie Y (0 router)</label>
+								<input class="form-control" name="routers[0].y" autocomplete="off" type="number" min="0" value="1">
+							</div>					
+						</div>						
+					</div>
+					
+					<div class="row">	
+						<h3 class="text-center col-md-12 pt-md-4">Użytkownicy:</h3>
+					</div>
+					<div class="row">		
+						<div class="col-md-12">
+							<label class="col-md-12">Ilość użytkowników</label>
+							<input class="form-control" name="user_counter" autocomplete="off" id="userCounter" onkeydown="numberFunction()" type="number" min="0" max="100" value="1">
+						</div>
+					</div>
+					<div class="row">		
+						<div class="col-md-6">
+							<label class="col-md-12">Minimum zakresu [Kb/s]</label>
+							<input class="form-control" name="minimum_user_demand" autocomplete="off" onkeydown="numberFunction()" type="number" min="0" step="1" value="1">
+						</div>	
+						<div class="col-md-6">
+							<label class="col-md-12">Maksimum zakresu [Kb/s]</label>
+							<input class="form-control" name="maximum_user_demand" autocomplete="off" onkeydown="numberFunction()" type="number" min="0" step="1" value="1">
+						</div>					
+					</div>	
+						
+					<!--<div class="row">	
+						<h3 class="text-center col-md-12 pt-md-4">Współczynniki:</h3>
+					</div>
+					<div class="row">						
+						<div class="col-md-4">
+							<label class="col-md-12">Współczynnik &Alpha;</label>
+							<input class="form-control" name="alpha" type="number" min="0" step="0.01" value="1">
+						</div>	
+						<div class="col-md-3">
+							<label class="col-md-12">Współczynnik &Beta;</label>
+							<input class="form-control" name="beta" type="number" min="0" step="0.01" value="1">
+						</div>	
+						<div class="col-md-3">
+							<label class="col-md-12">Współczynnik &Gamma;</label>
+							<input class="form-control" name="gamma" type="number" min="0" step="0.01" value="1">
+						</div>	
+						<div class="col-md-4">
+							<label class="col-md-12">Współczynnik &Omega;</label>
+							<input class="form-control" name="omega" type="number" min="0" step="0.01" value="1">
+						</div>				
+					</div>-->
+					
+					<div class="text-center mt-4">
+					  <button type="button" class="btn btn-xl btn-outline-light" id="submitBtn">
+							<i class="fas fa-search mr-2"></i>
+							Rozwiąż problem!
+					  </button>
+					</div>
+				</form>	
+			</div>
+		</div>
+    </header>
+ 
+    <footer>
+      <div class="container">
+        <p>&copy; Optymalizator 2018. All Rights Reserved.</p>
+      </div>
+    </footer>
+	<div class="loading-panel"></div>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="js/new-age.js"></script>
+    <script>
+    	function numberFunction() {
+		    var e = event || window.event;  // get event object
+		    var key = e.keyCode || e.which; // get key cross-browser
+
+		    if (key < 48 || key > 57) { //if it is not a number ascii code
+		        //Prevent default action, which is inserting character
+		        if (e.preventDefault) e.preventDefault(); //normal browsers
+		            e.returnValue = false; //IE
+		    }
+		}
+    </script>
+  </body>
+
+</html>
