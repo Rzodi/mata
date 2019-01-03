@@ -1,5 +1,8 @@
 #include "user_alpha_gamma.h"
-
+#include "position.h"
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
 
 user_alpha_gamma::user_alpha_gamma() {
 	// TODO Auto-generated constructor stub
@@ -10,8 +13,9 @@ user_alpha_gamma::~user_alpha_gamma() {
 	// TODO Auto-generated destructor stub
 }
 
-vector<vector<float>> user_alpha_gamma::user_position_demands(int users, float minDemand, float maxDemand, float x_grid, float y_grid, vector<Position> enb_positions, vector<Position> router_positions)
+vector<vector<float>> user_alpha_gamma::user_position_demands(int users, float minDemand, float maxDemand, float x_grid, float y_grid, vector<Position> enb_positions, vector<Position> router_positions, float enbR, float routerR)
 {
+	srand(time(NULL));
 	float mediumDemand = (maxDemand + minDemand)/2;
 	vector<vector<float>> my_vector(4, vector<float> (users));
 
@@ -20,16 +24,33 @@ vector<vector<float>> user_alpha_gamma::user_position_demands(int users, float m
 		return ((b - a) * ((float)rand() / RAND_MAX)) + a;
 	}
 	
-	AB.reserve(A.size() + B.size()); // preallocate memory
-	AB.insert(AB.end(), A.begin(), A.end());
-	AB.insert(AB.end(), B.begin(), B.end());
+	std::vector<Position> container = enb_positions;
+	container.insert(enb_positions.end(), router_positions.begin(), router_positions.end());
+	int enb_size = enb_positions.size();
+	int router_size = router_positions.size();
+	int total_size = container.size();
+	float rangeHelper;
 
 	for (int i = 0; i < users; i++) {
+
+		int random_enb_or_roouter = (std::rand() % total_size);
+		if (random_enb_or_roouter <= (enb_size-1))
+		{
+			rangeHelper = enbR;
+		}
+		else
+		{
+			rangeHelper = routerR;
+		}
+
 		float randThroughputMin = rand_FloatRange(minDemand, mediumDemand);
 		float randThroughputMax = rand_FloatRange(mediumDemand, maxDemand);
+		float x = container[random_enb_or_roouter].X + rangeHelper * cos(rand());
+		float y = container[random_enb_or_roouter].Y + rangeHelper * sin(rand());
+		/*
 		float x = rand_FloatRange(0, x_grid);
 		float y = rand_FloatRange(0, y_grid);
-		/*float randThroughputMin = minDemand + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX) / (maxDemand - minDemand));
+		float randThroughputMin = minDemand + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX) / (maxDemand - minDemand));
 		float randThroughputMax = maxDemand + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX) / (maxDemand - mediumDemand));
 		float x = static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / x_grid));
 		float y = static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / y_grid));*/
